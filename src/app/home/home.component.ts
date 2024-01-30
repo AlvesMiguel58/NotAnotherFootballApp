@@ -1,109 +1,34 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Players, Teams, Leagues } from '../data';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  homeSection: boolean = false;
-  searchSection: boolean = true;
-  currentSearch: string = 'players';
+export class HomeComponent implements OnInit {
+  homeSection: boolean = true;
+  searchSection: boolean = false;
+  currentSearch: string = '';
   searchResults: any[] = [];
-  player: any[] = [];
 
-  players: any[] = [{
-    player: {
-      id: 276,
-      name: "Neymar",
-      firstname: "Neymar",
-      lastname: "da Silva Santos Júnior",
-      age: 29,
-      nationality: "Brazil",
-      height: "175 cm",
-      weight: "68 kg",
-      injured: false,
-      photo: "https://media.api-sports.io/football/players/276.png",
-      birth: {
-        date: "1992-02-05",
-        place: "Mogi das Cruzes",
-        country: "Brazil"
-      }
-    },
-    statistics: {
-      0: {
-        team: {
-          id: 85,
-          name: "Paris Saint Germain",
-          logo: "https://media.api-sports.io/football/teams/85.png"
-        },
-        league: {
-          id: 61,
-          name: "Ligue 1",
-          country: "France",
-          logo: "https://media.api-sports.io/football/leagues/61.png",
-          flag: "https://media.api-sports.io/flags/fr.svg",
-          season: 2020
-        },
-        games: {
-          appearences: 13,
-          lineups: 10,
-          minutes: 975,
-          number: 34,
-          position: "Attacker",
-          rating: "7.307692",
-          captain: false
-        },
-        shots: {
-          total: 39,
-          on: 15
-        },
-        goals: {
-          total: 6,
-          conceded: 0,
-          assists: 3,
-          saves: null
-        },
-        passes: {
-          total: 660,
-          key: 35,
-          accuracy: 68
-        },
-        tackles: {
-          total: 8,
-          blocks: null,
-          interceptions: 6
-        },
-        duels: {
-          won: 122,
-          total: 247
-        },
-        dribbles: {
-          attempts: 104,
-          success: 60,
-          past: null
-        },
-        fouls: {
-          drawn: 51,
-          committed: 22
-        },
-        cards: {
-          yellow: 5,
-          yellowred: 1,
-          red: 1
-        },
-        penalty: {
-          won: null,
-          commited: null,
-          scored: 3,
-          missed: 0,
-          saved: null
-        }
-      }
-    }
-  }];
+  //Player variables
+  player: any[] = [];
+  players: any[] = Players;
+  @ViewChild('playerDialog')
+  playerDialog!: TemplateRef<any>;
+  //Team variables
+  team: any[] = [];
+  teams: any[] = Teams;
+  @ViewChild('teamDialog')
+  teamDialog!: TemplateRef<any>;
+  //League variables
+  league: any[] = [];
+  leagues: any[] = Leagues;
+  @ViewChild('leagueDialog')
+  leagueDialog!: TemplateRef<any>;
 
   searchForm = new FormGroup({
     search: new FormControl('', {
@@ -111,15 +36,10 @@ export class HomeComponent {
     })
   });
 
-  @ViewChild('playerDialog')
-  playerDialog!: TemplateRef<any>;
 
-  constructor(public dialog: MatDialog,) {
-    setTimeout(() => {
-      this.player = this.players[0];
-      this.showPlayer(this.players[0]);
-    }, 1000);
-  }
+  constructor(public dialog: MatDialog,) { }
+
+  ngOnInit(): void { }
 
   //On the welcome section the user is propmted to select a category to search for
   pickOne(type: string) {
@@ -135,21 +55,31 @@ export class HomeComponent {
     this.currentSearch = '';
     this.searchResults = [];
     this.player = [];
+    this.team = [];
+    this.league = [];
   }
 
+  //searchCategory is called when the user submits the search form
   searchCategory() {
-    // console.log("Search triggered", this.searchForm.value);
+    console.log("Search triggered", this.searchForm.value);
     this.searchForm.reset();
 
     if (this.currentSearch === 'players') {
       this.searchResults = this.players;
+    } else if (this.currentSearch === 'teams') {
+      this.searchResults = this.teams;
+    } else if (this.currentSearch === 'leagues') {
+      this.searchResults = this.leagues;
     }
+
     console.log(this.searchResults);
   }
 
+  //------------------ PLAYERS SECTION ------------------
+  //selectPlayer is called when a player is selected from the search results
   selectPlayer(player: any) {
     this.player = player;
-    console.log("Player selected", this.player);
+    // console.log("Player selected", this.player);
     this.showPlayer(this.player);
   }
 
@@ -157,4 +87,32 @@ export class HomeComponent {
   showPlayer(player: any) {
     this.dialog.open(this.playerDialog, { data: player });
   }
+  //------------------ PLAYERS SECTION END ------------------
+  //------------------ TEAMS SECTION ------------------
+  //selectTeam is called when a team is selected from the search results
+  selectTeam(team: any) {
+    this.team = team;
+    // console.log("team selected", this.team);
+    this.showTeam(this.team);
+  }
+
+  //Opens dialog
+  showTeam(team: any) {
+    this.dialog.open(this.teamDialog, { data: team });
+  }
+  //------------------ TEAMS SECTION END ------------------
+  //------------------ LEAGUE SECTION ------------------
+  //selectleague is called when a league is selected from the search results
+  selectLeague(league: any) {
+    this.league = league;
+    // console.log("league selected", this.league);
+    this.showLeague(this.league);
+  }
+
+  //Opens dialog
+  showLeague(league: any) {
+    this.dialog.open(this.leagueDialog, { data: league });
+  }
+  //------------------ LEAGUE SECTION END ------------------
 }
+

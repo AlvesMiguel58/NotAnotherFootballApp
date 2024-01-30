@@ -1,5 +1,7 @@
 <div class="player-info-card">
-    <button (click)="closeDialog()"><span class="material-symbols-outlined"> cancel </span></button>
+    <button (click)="closeDialog()" class="close-btn">
+        <span class="material-symbols-outlined"> cancel </span>
+    </button>
 
     <h2 style="text-align: center;">{{player?.player.firstname}} {{player?.player.lastname}}</h2>
     <div class="player-overview">
@@ -11,7 +13,7 @@
         <div class="bottom" *ngIf="player?.statistics[0].games.rating"><span class="green-title">Rating:</span> {{player?.statistics[0].games.rating}}</div>
     </div>
     <hr />
-    <div class="player-info">
+    <div style="text-align: center;">
         <p><span class="green-title" *ngIf="player?.player.height">Height:</span> {{player?.player.height}} <span class="green-title" *ngIf="player?.player.weight">Weight:</span> {{player?.player.weight}}</p>
         <p><span class="green-title">Born:</span> {{player?.player.birth.date}} in {{player?.player.birth.place}} ({{player?.player.birth.country}})</p>
     </div>

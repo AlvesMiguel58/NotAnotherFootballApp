@@ -2,20 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  selector: 'app-leagues',
+  templateUrl: './leagues.component.html',
+  styleUrls: ['./leagues.component.scss']
 })
-export class PlayerComponent implements OnInit {
-  @Input() player: any;
+export class LeaguesComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<PlayerComponent>) { }
+
+  constructor(private dialogRef: MatDialogRef<LeaguesComponent>) { }
+  @Input() league: any;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    if (this.player) {
-      console.log('player card', this.player);
+    if (this.league) {
+      console.log('league card', this.league);
     }
   }
 

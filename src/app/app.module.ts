@@ -9,12 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './shared/material/material.module';
 import { PlayerComponent } from './player/player.component';
+import { TeamComponent } from './team/team.component';
+import { CommonModule } from '@angular/common';
+import { LeaguesComponent } from './leagues/leagues.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PlayerComponent
+    PlayerComponent,
+    TeamComponent,
+    LeaguesComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { PlayerComponent } from './player/player.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

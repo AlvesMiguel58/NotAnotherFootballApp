@@ -1,0 +1,46 @@
+<div class="team-info-card">
+    <button (click)="closeDialog()" class="close-btn">
+        <span class="material-symbols-outlined"> cancel </span>
+    </button>
+
+    <div class="team-cover">
+        <img [src]="team?.team.logo" alt="" />
+        <h2 style="text-align: center;">
+            {{team?.team.name}} <span class="green-title"> ({{team?.team.country}})</span>
+        </h2>
+        <p style="margin: 0"><span class="green-title">Est</span> {{team?.team.founded}}</p>
+    </div>
+    <hr />
+
+    <div class="venue-info" *ngIf="team?.venue.id">
+        <div class="venue-img">
+            <img *ngIf="team?.venue.image" [src]="team?.venue.image" alt="" />
+        </div>
+        <div class="venue-data">
+            <p><span class="green-title" *ngIf="team?.venue.city">City:</span> {{team?.venue.city}}</p>
+            <p><span class="green-title" *ngIf="team?.venue.address">Address:</span> {{team?.venue.address}}</p>
+            <p><span class="green-title" *ngIf="team?.venue.capacity">Capacity:</span> {{team?.venue.capacity}}</p>
+        </div>
+    </div>
+    <hr />
+
+    <div class="players-container" *ngIf="team.players">
+        <h3 style="text-align: center;">Line up</h3>
+
+        <ng-container *ngFor="let player of team.players ">
+            <div class="player-card" (click)="selectPlayer(player)">
+                <div class="player-photo">
+                    <img [src]="player.photo" alt="" />
+                    <span class="material-symbols-outlined injured" *ngIf="player.injured"> healing </span>
+                </div>
+
+                <div class="player-info">
+                    <p><span class="green-title">Name:</span> {{player?.firstname}} {{player?.lastname}}</p>
+                    <p><span class="green-title">Age:</span> {{player?.age}}</p>
+                    <p><span class="green-title">Height:</span> {{player?.height}} <span class="green-title">Weight:</span> {{player?.weight}}</p>
+                    <p><span class="green-title">Nationality:</span> {{player?.nationality}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

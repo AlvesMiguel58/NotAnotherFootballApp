@@ -22,16 +22,16 @@
 
         <form [formGroup]="searchForm">
             <div class="search-input">
-                <input class="s-input" type="text" placeholder="search for any " formControlName="search" />
+                <input #searchWord class="s-input" type="text" placeholder="search for any " formControlName="search" />
                 <button class="search-btn" (click)="searchCategory()" [disabled]="searchForm.invalid">Search</button>
             </div>
             <br />
         </form>
 
-        <hr />
+        <!-- ------------------ PLAYERS SECTION ------------------ -->
         <!-- Player search results shown here -->
         <div class="results-block" *ngIf="currentSearch === 'players'">
-            <ng-container *ngFor="let player of players">
+            <ng-container *ngFor="let player of searchResults">
                 <div class="player-card" (click)="selectPlayer(player)">
                     <div class="player-photo">
                         <img [src]="player.player.photo" alt="" />
@@ -46,6 +46,44 @@
                 </div>
             </ng-container>
         </div>
+        <!-- ------------------ PLAYERS SECTION END ------------------ -->
+        <!-- ------------------ TEAMS SECTION ------------------ -->
+        <!-- Team search results shown here -->
+        <div class="results-block" *ngIf="currentSearch === 'teams'">
+            <ng-container *ngFor="let team of searchResults">
+                <div class="team-card" (click)="selectTeam(team)">
+                    <div class="team-photo">
+                        <img [src]="team?.team.logo" alt="" />
+                    </div>
+                    <div class="team-info">
+                        <h3>{{team?.team.name}}</h3>
+                        <p>
+                            <span class="green-title" *ngIf="team?.team.founded">Founded:</span> {{team?.team.founded}} <span class="green-title"> ({{team?.team.country}})</span>
+                        </p>
+                        <p>
+                            <span class="green-title" *ngIf="team?.venue.name">Venue:</span> {{team?.venue.name}} <span class="green-title" *ngIf="team?.venue.surface">({{team?.venue.surface}})</span>
+                        </p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <!-- ------------------ TEAMS SECTION END ------------------ -->
+        <!-- ------------------ LEAUGES SECTION ------------------ -->
+        <!-- League search results shown here -->
+        <div class="results-block" *ngIf="currentSearch === 'leagues'">
+            <ng-container *ngFor="let league of leagues">
+                <div class="leagues-card" (click)="selectLeague(league)">
+                    <div class="league-photo">
+                        <img [src]="league?.league.logo" alt="" />
+                    </div>
+                    <div class="leagues-info">
+                        <h3>{{league?.league.name}}</h3>
+                        <p><span class="green-title" *ngIf="league?.country.name">Country:</span> {{league?.country.name}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <!-- ------------------ TEAMS SECTION END ------------------ -->
     </div>
 </div>
 
@@ -53,4 +91,13 @@
 <!-- Player Dialog-->
 <ng-template #playerDialog>
     <app-player [player]="player"></app-player>
+</ng-template>
+
+<!-- Team Dialog-->
+<ng-template #teamDialog>
+    <app-team [team]="team"></app-team>
+</ng-template>
+<!-- League Dialog -->
+<ng-template #leagueDialog>
+    <app-leagues [league]="league"></app-leagues>
 </ng-template>

@@ -1,0 +1,63 @@
+<div class="league-info-card">
+    <button (click)="closeDialog()" class="close-btn">
+        <span class="material-symbols-outlined"> cancel </span>
+    </button>
+
+    <div class="team-cover">
+        <img [src]="league?.league.logo" alt="" />
+        <h2 style="text-align: center;">
+            {{league?.league.name}}
+        </h2>
+        <p><span class="green-title" *ngIf="league?.seasons.start">Starts:</span> {{league?.seasons.start}} <span class="green-title" *ngIf="league?.seasons.end">Ends:</span> {{league?.seasons.end}}</p>
+    </div>
+    <hr />
+
+    <div class="league-info" *ngIf="league?.country.code">
+        <div class="league-logo">
+            <img *ngIf="league?.country.flag" [src]="league?.country.flag" alt="" />
+        </div>
+        <div class="league-data">
+            <p><span class="green-title" *ngIf="league?.country.name">Country:</span> {{league?.country.name}}</p>
+        </div>
+    </div>
+    <hr />
+
+    <div class="teams-container">
+        <h3 style="text-align: center;">Standings</h3>
+
+        <table mat-table style="width: 100%;">
+            <thead>
+                <tr class="table-head">
+                    <th mat-header-cell>
+                        <div class="align">Rank</div>
+                    </th>
+                    <th><div class="align"></div></th>
+                    <th><div class="align">P</div></th>
+                    <th><div class="align">L</div></th>
+                    <th><div class="align">D</div></th>
+                    <th><div class="align">W</div></th>
+                    <th><div class="align">GD</div></th>
+                    <th><div class="align">Points</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let standing of league?.standings">
+                    <tr class="table-content">
+                        <td>{{standing.rank}}</td>
+                        <td>
+                            <div class="team-pic">
+                                <img class="img-preview" [src]="standing.team.logo" alt="" />
+                            </div>
+                        </td>
+                        <td>{{standing.all.played}}</td>
+                        <td>{{standing.all.lose}}</td>
+                        <td>{{standing.all.draw}}</td>
+                        <td>{{standing.all.win}}</td>
+                        <td>{{standing.goalsDiff}}</td>
+                        <td>{{standing.points}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
