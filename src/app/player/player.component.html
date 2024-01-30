@@ -1,0 +1,108 @@
+<div class="player-info-card">
+    <button (click)="closeDialog()"><span class="material-symbols-outlined"> cancel </span></button>
+
+    <h2 style="text-align: center;">{{player?.player.firstname}} {{player?.player.lastname}}</h2>
+    <div class="player-overview">
+        <div class="top">
+            <p>{{player?.statistics[0].games.number}}</p>
+            <img [src]="player?.player.photo" alt="" />
+        </div>
+        <br />
+        <div class="bottom" *ngIf="player?.statistics[0].games.rating"><span class="green-title">Rating:</span> {{player?.statistics[0].games.rating}}</div>
+    </div>
+    <hr />
+    <div class="player-info">
+        <p><span class="green-title" *ngIf="player?.player.height">Height:</span> {{player?.player.height}} <span class="green-title" *ngIf="player?.player.weight">Weight:</span> {{player?.player.weight}}</p>
+        <p><span class="green-title">Born:</span> {{player?.player.birth.date}} in {{player?.player.birth.place}} ({{player?.player.birth.country}})</p>
+    </div>
+    <hr />
+
+    <div class="league-info">
+        <div class="league-logo">
+            <img *ngIf="player?.statistics[0].league.logo" [src]="player?.statistics[0].league.logo" alt="" />
+        </div>
+        <p>
+            {{player?.statistics[0].league.name}} <span class="green-title">({{player?.statistics[0].league.country}})</span>
+        </p>
+        <div class="league-country">
+            <img *ngIf="player?.statistics[0].league.flag" [src]="player?.statistics[0].league.flag" alt="" />
+        </div>
+    </div>
+    <hr />
+
+    <div class="team-info">
+        <div class="team-logo">
+            <img [src]="player?.statistics[0].team.logo" alt="" />
+        </div>
+        <p>
+            {{player?.statistics[0].team.name}}
+        </p>
+    </div>
+    <hr />
+
+    <div class="games-info">
+        <p class="green-title" *ngIf="player?.statistics[0].games.captain">Team Captian</p>
+
+        <div>
+            <h3 *ngIf="player?.statistics[0].games.position"><span class="green-title">Position: </span>{{player?.statistics[0].games.position}}</h3>
+            <p><span class="green-title">Appearences: </span>{{player?.statistics[0].games.appearences}} <span class="green-title">Minutes played: </span>{{player?.statistics[0].games.minutes}}</p>
+        </div>
+    </div>
+    <hr />
+
+    <div class="player-stats">
+        <div class="goals">
+            <h3 class="green-title">Goals</h3>
+            <p><span class="green-title" *ngIf="player?.statistics[0].goals.assists">Assists: </span> {{player?.statistics[0].goals.assists}} <span class="green-title">Conceded: </span> {{player?.statistics[0].goals.conceded}} <span class="green-title" *ngIf="player?.statistics[0].goals.saves">Saves: </span> {{player?.statistics[0].goals.saves}} <span class="green-title" *ngIf="player?.statistics[0].goals.total">Total: </span> {{player?.statistics[0].goals.total}}</p>
+        </div>
+        <hr />
+
+        <div class="shots">
+            <h3 class="green-title">Shots</h3>
+            <p><span class="green-title">On: </span> {{player?.statistics[0].shots.on}} <span class="green-title">Total: </span> {{player?.statistics[0].shots.on}}</p>
+        </div>
+        <hr />
+
+        <div class="passes">
+            <h3 class="green-title">Passes</h3>
+            <p><span class="green-title">Accuracy: </span> {{player?.statistics[0].passes.accuracy}} <span class="green-title">Key: </span> {{player?.statistics[0].passes.key}} <span class="green-title">Total: </span> {{player?.statistics[0].passes.total}}</p>
+        </div>
+        <hr />
+
+        <div class="tackles">
+            <h3 class="green-title">Tackles</h3>
+            <p><span class="green-title" *ngIf="player?.statistics[0].tackles.blocks">Blocks: </span> {{player?.statistics[0].tackles.blocks}} <span class="green-title">Interceptions: </span> {{player?.statistics[0].tackles.interceptions}} <span class="green-title">Total: </span> {{player?.statistics[0].tackles.total}}</p>
+        </div>
+        <hr />
+
+        <div class="duels">
+            <h3 class="green-title">Duels</h3>
+            <p><span class="green-title">Won: </span> {{player?.statistics[0].duels.won}} <span class="green-title">Total: </span> {{player?.statistics[0].duels.total}}</p>
+        </div>
+        <hr />
+
+        <div class="dribbles">
+            <h3 class="green-title">Dribbles</h3>
+            <p><span class="green-title">Attempts: </span> {{player?.statistics[0].dribbles.attempts}} <span class="green-title">Success: </span> {{player?.statistics[0].dribbles.success}} <span class="green-title" *ngIf="player?.statistics[0].dribbles.past">Past: </span> {{player?.statistics[0].dribbles.past}}</p>
+        </div>
+        <hr />
+
+        <div class="fouls">
+            <h3 class="green-title">Fouls</h3>
+            <p><span class="green-title">Drawn: </span> {{player?.statistics[0].fouls.drawn}} <span class="green-title">Committed: </span> {{player?.statistics[0].fouls.committed}}</p>
+        </div>
+        <hr />
+
+        <div class="cards">
+            <h3 class="green-title">Cards</h3>
+            <p><span class="green-title">Yellow: </span> {{player?.statistics[0].cards.yellow}} <span class="green-title">Yellow/Red: </span> {{player?.statistics[0].cards.yellowred}} <span class="green-title">Red: </span> {{player?.statistics[0].cards.red}}</p>
+        </div>
+        <hr />
+
+        <div class="penalty">
+            <h3 class="green-title">Penalty</h3>
+            <p><span class="green-title" *ngIf="player?.statistics[0].penalty.won">Won: </span> {{player?.statistics[0].penalty.won}} <span class="green-title" *ngIf="player?.statistics[0].penalty.commited">Commited: </span> {{player?.statistics[0].penalty.commited}} <span class="green-title" *ngIf="player?.statistics[0].penalty.scored">Scored: </span> {{player?.statistics[0].penalty.scored}} <span class="green-title">Missed: </span> {{player?.statistics[0].penalty.missed}} <span class="green-title" *ngIf="player?.statistics[0].penalty.saved">Saved: </span> {{player?.statistics[0].penalty.saved}}</p>
+        </div>
+        <hr />
+    </div>
+</div>

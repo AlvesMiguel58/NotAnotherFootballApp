@@ -1,0 +1,83 @@
+.pick-btns,
+.search-btn {
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.7s;
+    width: 25%;
+    font-size: 25px;
+    color: white;
+    text-shadow: 2px 2px #000;
+    margin: 0 auto;
+    @media only screen and (max-width: 1024px) {
+        margin-bottom: 5px;
+    }
+    border: none;
+}
+.cancel-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 23px;
+    left: 23px;
+    width: 50px;
+    height: 50px;
+    border: 0.5px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.7s;
+}
+.search-btn {
+    width: 15%;
+    font-size: 15px;
+    padding: 10px;
+}
+.search-btn {
+    background-color: darkgreen;
+}
+.search-btn:disabled {
+    background-color: grey;
+}
+.pick-league,
+.pick-team,
+.pick-player {
+    background-image: url(../../assets/images/league.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pick-team {
+    background-image: url(../../assets/images/teams.jpeg);
+}
+.pick-player {
+    background-image: url(../../assets/images/players.jpeg);
+}
+
+// button Animations
+.pick-btns:hover,
+.cancel-btn:hover,
+.search-btn:hover {
+    transform: translateY(-0.2em);
+    background: darkgreen;
+    box-shadow: 4px 5px 8px #888;
+}
+.cancel-btn:hover {
+    color: white;
+    border: 0.5px white solid;
+}
+.pick-btns:active,
+.cancel-btn:active,
+.search-btn:active {
+    transform: translateY(0.3em);
+    background: rgb(14, 50, 14);
+    box-shadow: none;
+}
+
+.search-btn:hover:disabled {
+    background-color: grey;
+    transform: translateY(0);
+    box-shadow: none;
+}

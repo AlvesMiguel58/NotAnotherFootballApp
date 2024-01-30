@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'app/themes/layout';
+@import 'app/themes/buttons';
+@import 'app/themes/inputs';
+@import 'app/themes/typography';
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Graduate', serif;
+    // color: white;
+    background-color: black;
+    background-image: url('../src/assets/images/ball.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

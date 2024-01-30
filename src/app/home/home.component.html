@@ -1,0 +1,56 @@
+<div class="welcome">
+    <div class="welcome-block" *ngIf="homeSection">
+        <h1>Welcome to Not Another Football Website</h1>
+        <h2>
+            Lets get started <br />
+            Pick one of the following
+        </h2>
+        <br />
+
+        <div class="pick-one">
+            <div class="pick-btns pick-league" (click)="pickOne('leagues')">Leagues</div>
+            <div class="pick-btns pick-team" (click)="pickOne('teams')">Teams</div>
+            <div class="pick-btns pick-player" (click)="pickOne('players')">Players</div>
+        </div>
+    </div>
+
+    <div class="search-block" *ngIf="searchSection">
+        <!-- back butto on top left corner of search block -->
+        <div class="cancel-btn" (click)="cancelSearch()"><span class="material-symbols-outlined"> arrow_back </span></div>
+
+        <h1>Search {{currentSearch}}</h1>
+
+        <form [formGroup]="searchForm">
+            <div class="search-input">
+                <input class="s-input" type="text" placeholder="search for any " formControlName="search" />
+                <button class="search-btn" (click)="searchCategory()" [disabled]="searchForm.invalid">Search</button>
+            </div>
+            <br />
+        </form>
+
+        <hr />
+        <!-- Player search results shown here -->
+        <div class="results-block" *ngIf="currentSearch === 'players'">
+            <ng-container *ngFor="let player of players">
+                <div class="player-card" (click)="selectPlayer(player)">
+                    <div class="player-photo">
+                        <img [src]="player.player.photo" alt="" />
+                        <span class="material-symbols-outlined injured" *ngIf="player.player.injured"> healing </span>
+                    </div>
+                    <div class="player-info">
+                        <p><span class="green-title">Name:</span> {{player?.player.firstname}} {{player?.player.lastname}}</p>
+                        <p><span class="green-title">Age:</span> {{player?.player.age}}</p>
+                        <p><span class="green-title">Height:</span> {{player?.player.height}} <span class="green-title">Weight:</span> {{player?.player.weight}}</p>
+                        <p><span class="green-title">Nationality:</span> {{player?.player.nationality}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- DIALOGS -->
+<!-- Player Dialog-->
+<ng-template #playerDialog>
+    <app-player [player]="player"></app-player>
+</ng-template>

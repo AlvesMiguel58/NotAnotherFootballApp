@@ -1,0 +1,23 @@
+.search-input {
+    // width: 300px;
+    padding: 13px 16px;
+    border-radius: 3px;
+    border: solid 1px #e5e5e5;
+    background-color: #f9f9fb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20%;
+    .s-input {
+        width: 100%;
+        font-size: 15px;
+        line-height: 1.33;
+        color: #757575;
+        border: none;
+        background-color: #f9f9fb;
+    }
+}
+
+.s-input:focus {
+    outline: none;
+}
