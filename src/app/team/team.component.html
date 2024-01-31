@@ -24,21 +24,43 @@
     </div>
     <hr />
 
-    <div class="players-container" *ngIf="team.players">
+    <div class="spinner">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+    <div class="players-container" *ngIf="players.length > 0">
         <h3 style="text-align: center;">Line up</h3>
 
-        <ng-container *ngFor="let player of team.players ">
+        <ng-container *ngFor="let player of players">
             <div class="player-card" (click)="selectPlayer(player)">
                 <div class="player-photo">
-                    <img [src]="player.photo" alt="" />
-                    <span class="material-symbols-outlined injured" *ngIf="player.injured"> healing </span>
+                    <img [src]="player?.player.photo" alt="" />
+                    <span class="material-symbols-outlined injured" *ngIf="player?.player.injured"> healing </span>
                 </div>
 
                 <div class="player-info">
-                    <p><span class="green-title">Name:</span> {{player?.firstname}} {{player?.lastname}}</p>
-                    <p><span class="green-title">Age:</span> {{player?.age}}</p>
-                    <p><span class="green-title">Height:</span> {{player?.height}} <span class="green-title">Weight:</span> {{player?.weight}}</p>
-                    <p><span class="green-title">Nationality:</span> {{player?.nationality}}</p>
+                    <p><span class="green-title">Name:</span> {{player?.player.firstname}} {{player?.player.lastname}}</p>
+                    <p><span class="green-title">Age:</span> {{player?.player.age}}</p>
+                    <p><span class="green-title" *ngIf="player?.player.height">Height:</span> {{player?.player.height}} <span class="green-title" *ngIf="player?.player.weight">Weight:</span> {{player?.player.weight}}</p>
+                    <p><span class="green-title">Nationality:</span> {{player?.player.nationality}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="players-container" *ngIf="couches.length > 0">
+        <h3 style="text-align: center;">Couches</h3>
+
+        <ng-container *ngFor="let couch of couches">
+            <div class="player-card">
+                <div class="player-photo">
+                    <img [src]="couch?.photo" alt="" />
+                </div>
+
+                <div class="player-info">
+                    <p><span class="green-title">Name:</span> {{couch?.firstname}} {{couch?.lastname}}</p>
+                    <p><span class="green-title">Age:</span> {{couch?.age}}</p>
+                    <p><span class="green-title">Height:</span> {{couch?.height}} <span class="green-title">Weight:</span> {{couch?.weight}}</p>
+                    <p><span class="green-title">Nationality:</span> {{couch?.nationality}}</p>
                 </div>
             </div>
         </ng-container>

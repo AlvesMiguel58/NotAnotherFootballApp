@@ -10,7 +10,8 @@
         <div class="pick-one">
             <div class="pick-btns pick-league" (click)="pickOne('leagues')">Leagues</div>
             <div class="pick-btns pick-team" (click)="pickOne('teams')">Teams</div>
-            <div class="pick-btns pick-player" (click)="pickOne('players')">Players</div>
+            <!-- Players section got scrapped because you need a team ID to get the players, so not possible by soley searching a player name -->
+            <!-- <div class="pick-btns pick-player" (click)="pickOne('players')">Players</div> -->
         </div>
     </div>
 
@@ -27,6 +28,10 @@
             </div>
             <br />
         </form>
+
+        <div class="spinner">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </div>
 
         <!-- ------------------ PLAYERS SECTION ------------------ -->
         <!-- Player search results shown here -->
@@ -53,7 +58,7 @@
             <ng-container *ngFor="let team of searchResults">
                 <div class="team-card" (click)="selectTeam(team)">
                     <div class="team-photo">
-                        <img [src]="team?.team.logo" alt="" />
+                        <img *ngIf="team?.team.logo" [src]="team?.team.logo" alt="" />
                     </div>
                     <div class="team-info">
                         <h3>{{team?.team.name}}</h3>
@@ -71,10 +76,10 @@
         <!-- ------------------ LEAUGES SECTION ------------------ -->
         <!-- League search results shown here -->
         <div class="results-block" *ngIf="currentSearch === 'leagues'">
-            <ng-container *ngFor="let league of leagues">
+            <ng-container *ngFor="let league of searchResults">
                 <div class="leagues-card" (click)="selectLeague(league)">
                     <div class="league-photo">
-                        <img [src]="league?.league.logo" alt="" />
+                        <img *ngIf="league?.league.logo" [src]="league?.league.logo" alt="" />
                     </div>
                     <div class="leagues-info">
                         <h3>{{league?.league.name}}</h3>

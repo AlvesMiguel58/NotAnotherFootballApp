@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Players, Teams, Leagues } from '../data';
+import { HttpService } from '../services/httpservice.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,8 @@ export class HomeComponent implements OnInit {
   searchSection: boolean = false;
   currentSearch: string = '';
   searchResults: any[] = [];
+  endpoint: string = '';
+  isLoading: boolean = false;
 
   //Player variables
   player: any[] = [];
@@ -21,12 +24,12 @@ export class HomeComponent implements OnInit {
   playerDialog!: TemplateRef<any>;
   //Team variables
   team: any[] = [];
-  teams: any[] = Teams;
+  teams: any[] = [];
   @ViewChild('teamDialog')
   teamDialog!: TemplateRef<any>;
   //League variables
   league: any[] = [];
-  leagues: any[] = Leagues;
+  leagues: any[] = [];
   @ViewChild('leagueDialog')
   leagueDialog!: TemplateRef<any>;
 
@@ -37,7 +40,10 @@ export class HomeComponent implements OnInit {
   });
 
 
-  constructor(public dialog: MatDialog,) { }
+  constructor(
+    public dialog: MatDialog,
+    public http: HttpService
+  ) { }
 
   ngOnInit(): void { }
 
@@ -61,18 +67,30 @@ export class HomeComponent implements OnInit {
 
   //searchCategory is called when the user submits the search form
   searchCategory() {
+    this.isLoading = true;
     console.log("Search triggered", this.searchForm.value);
-    this.searchForm.reset();
 
-    if (this.currentSearch === 'players') {
-      this.searchResults = this.players;
-    } else if (this.currentSearch === 'teams') {
-      this.searchResults = this.teams;
+    if (this.currentSearch === 'teams') {
+      this.endpoint = 'teams';
     } else if (this.currentSearch === 'leagues') {
-      this.searchResults = this.leagues;
+      this.endpoint = 'leagues';
+    } else if (this.currentSearch === 'players') {
+      this.endpoint = 'players';
+      this.searchResults = Players;
+      // Players section got scrapped because you need a team ID to get the players, so not possible by soley searching a player name
     }
 
-    console.log(this.searchResults);
+    this.http.getData(this.endpoint, this.searchForm.value)
+      .subscribe((data: any) => {
+        console.log(data);
+
+        this.searchResults = data.response;
+        // console.log('searchResults', this.searchResults);
+        this.isLoading = false;
+      },
+        (error) => { console.log('Error', error) });
+
+    this.searchForm.reset();
   }
 
   //------------------ PLAYERS SECTION ------------------

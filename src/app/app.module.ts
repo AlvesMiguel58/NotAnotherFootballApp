@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { PlayerComponent } from './player/player.component';
 import { TeamComponent } from './team/team.component';
 import { CommonModule } from '@angular/common';
 import { LeaguesComponent } from './leagues/leagues.component';
+import { HttpService } from './services/httpservice.service';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,14 @@ import { LeaguesComponent } from './leagues/leagues.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
     CommonModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

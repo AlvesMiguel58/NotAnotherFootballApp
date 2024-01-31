@@ -22,6 +22,9 @@
     </div>
     <hr />
 
+    <div class="spinner">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
     <div class="teams-container">
         <h3 style="text-align: center;">Standings</h3>
 
@@ -41,8 +44,8 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let standing of league?.standings">
-                    <tr class="table-content">
+                <ng-container *ngFor="let standing of standings">
+                    <tr class="table-content" (click)="selectTeam(standing.team)">
                         <td>{{standing.rank}}</td>
                         <td>
                             <div class="team-pic">
