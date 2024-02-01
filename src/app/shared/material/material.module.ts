@@ -1,3 +1,5 @@
+// this module is used to import all the material modules that are used in the application
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';

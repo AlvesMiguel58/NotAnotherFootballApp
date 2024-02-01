@@ -39,7 +39,7 @@
 
                 <div class="player-info">
                     <p><span class="green-title">Name:</span> {{player?.player.firstname}} {{player?.player.lastname}}</p>
-                    <p><span class="green-title">Age:</span> {{player?.player.age}}</p>
+                    <p><span class="green-title" *ngIf="player?.player.age">Age:</span> {{player?.player.age}}</p>
                     <p><span class="green-title" *ngIf="player?.player.height">Height:</span> {{player?.player.height}} <span class="green-title" *ngIf="player?.player.weight">Weight:</span> {{player?.player.weight}}</p>
                     <p><span class="green-title">Nationality:</span> {{player?.player.nationality}}</p>
                 </div>
@@ -59,8 +59,8 @@
                 <div class="player-info">
                     <p><span class="green-title">Name:</span> {{couch?.firstname}} {{couch?.lastname}}</p>
                     <p><span class="green-title">Age:</span> {{couch?.age}}</p>
-                    <p><span class="green-title">Height:</span> {{couch?.height}} <span class="green-title">Weight:</span> {{couch?.weight}}</p>
-                    <p><span class="green-title">Nationality:</span> {{couch?.nationality}}</p>
+                    <p><span class="green-title" *ngIf="couch?.height">Height:</span> {{couch?.height}} <span class="green-title" *ngIf="couch?.weight">Weight:</span> {{couch?.weight}}</p>
+                    <p><span class="green-title" *ngIf="couch?.nationality">Nationality:</span> {{couch?.nationality}}</p>
                 </div>
             </div>
         </ng-container>

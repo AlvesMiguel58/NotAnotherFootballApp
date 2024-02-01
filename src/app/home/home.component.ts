@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
     })
   });
 
-
   constructor(
     public dialog: MatDialog,
     public http: HttpService
@@ -55,6 +54,7 @@ export class HomeComponent implements OnInit {
     // console.log(this.currentSearch);
   }
 
+  //cancelSearch is called when the user clicks the cancel button
   cancelSearch() {
     this.homeSection = true;
     this.searchSection = false;
@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
       // Players section got scrapped because you need a team ID to get the players, so not possible by soley searching a player name
     }
 
+    // this.http.getData(this.endpoint, this.searchForm.value) is calling the getData function in the httpservice.service.ts file
     this.http.getData(this.endpoint, this.searchForm.value)
       .subscribe((data: any) => {
         console.log(data);

@@ -48,6 +48,7 @@ export class TeamComponent implements OnInit {
         });
   }
 
+  //gets the players for the team via the api with teamId
   getPlayers(teamId: any) {
     this.isLoading = true;
     let data = {

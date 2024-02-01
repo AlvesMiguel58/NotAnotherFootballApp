@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environments';
 export class HttpService {
   public URL: string = environment.apiUrl;
 
+  // Define the HTTP headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) { }
 
+  // This is a reusable service for http get requests
   getData(endpoint: string, data: any): Observable<any> {
     // console.log('service data passed', data);
 
